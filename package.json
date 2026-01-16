@@ -1,0 +1,32 @@
+{
+  "name": "smoothie_store",
+  "version": "1.0.0",
+  "description": "Ecommerce",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "pnpm -r lint",
+    "tsc": "pnpm -r tsc",
+    "build": "pnpm -r build",
+    "start:api": "pnpm --filter @smoothie_store/api start -r",
+    "start:web": "pnpm --filter @smoothie_store/web start:server -r"
+  },
+  "private": "true",
+  "type": "module",
+  "keywords": [
+    "monorepo",
+    "javascript",
+    "typescript"
+  ],
+  "author": {
+    "name": "smoothie",
+    "email": "mjnhdi35@gmail.com"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.27.0",
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "prettier": "^3.8.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,30 @@
+# dependencies
+node_modules
+.pnpm-store
+pnpm-lock.yaml
+# build
+dist
+build
+coverage
+.next
+.out
+turbo
+
+# env
+.env
+.env.*
+!.env.example
+
+# logs
+logs
+*.log
+
+# generated
+prisma/migrations
+*.min.js
+*.map
+
+# misc
+Dockerfile
+docker-compose*.yml
+
