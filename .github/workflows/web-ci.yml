@@ -40,6 +40,11 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build Shared Packages
+        run: |
+          pnpm --filter @smoothie_store/types build
+          pnpm --filter @smoothie_store/contracts build
+
       - name: Lint
         run: pnpm --filter @smoothie_store/web lint
 
