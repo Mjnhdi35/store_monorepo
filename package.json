@@ -8,8 +8,8 @@
     "lint": "pnpm -r lint",
     "tsc": "pnpm -r tsc",
     "build": "pnpm -r build",
-    "start:api": "pnpm --filter @smoothie_store/api start -r",
-    "start:web": "pnpm --filter @smoothie_store/web start:server -r"
+    "start:api": "pnpm --filter @smoothie_store/api start",
+    "start:web": "pnpm --filter @smoothie_store/web start:server"
   },
   "private": "true",
   "type": "module",
