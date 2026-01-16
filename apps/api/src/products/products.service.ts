@@ -7,7 +7,6 @@ export class ProductsService {
   constructor(@InjectKnex() private readonly knex: Knex) {}
 
   async findAll() {
-    console.log('product');
     return this.knex('products').select('*');
   }
 
