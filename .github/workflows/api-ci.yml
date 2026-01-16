@@ -50,9 +50,13 @@ jobs:
 
       - name: Unit Tests
         run: pnpm --filter @smoothie_store/api test
+        env:
+          JWT_SECRET: 'test-secret'
 
       - name: E2E Tests
         run: pnpm --filter @smoothie_store/api test:e2e
+        env:
+          JWT_SECRET: 'test-secret'
 
       - name: Build
         run: pnpm --filter @smoothie_store/api build
