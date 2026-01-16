@@ -19,7 +19,7 @@ export class AuthService {
   ): Promise<Omit<User, 'password'> | null> {
     const user = await this.usersService.findByEmailOrUsername(usernameOrEmail, usernameOrEmail);
     if (user?.password && (await this.hashingService.compare(pass, user.password))) {
-      const { password, ...result } = user;
+      const { password: _password, ...result } = user;
       return result;
     }
     return null;

@@ -53,13 +53,15 @@ describe('AuthModule (e2e)', () => {
     // 2. Mock password match
     mockHashingService.compare.mockResolvedValue(true);
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return request(app.getHttpServer())
       .post('/api/auth/login')
       .send(loginDto)
       .expect(201)
       .expect((res) => {
-        expect(res.body.data).toHaveProperty('access_token');
-        expect(res.body.data.user.username).toBe('user');
+        const body = res.body as { data: { user: { username: string }; access_token: string } };
+        expect(body.data).toHaveProperty('access_token');
+        expect(body.data.user.username).toBe('user');
       });
   });
 

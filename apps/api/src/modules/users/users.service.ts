@@ -22,6 +22,7 @@ export class UsersService extends BaseService<UserEntity> {
     }
 
     const password = await this.hashingService.hash(data.password);
+
     return this.repository.create({ ...data, password } as any);
   }
 

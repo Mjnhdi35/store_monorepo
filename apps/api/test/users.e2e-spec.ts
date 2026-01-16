@@ -55,12 +55,14 @@ describe('UsersModule (e2e)', () => {
       updatedAt: new Date(),
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return request(app.getHttpServer())
       .post('/api/users')
       .send(dto)
       .expect(201)
       .expect((res) => {
-        expect(res.body.data.username).toBe(dto.username);
+        const body = res.body as { data: RegisterRequest };
+        expect(body.data.username).toBe(dto.username);
         expect(mockUsersRepository.create).toHaveBeenCalled();
       });
   });
@@ -78,6 +80,7 @@ describe('UsersModule (e2e)', () => {
       email: dto.email,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return request(app.getHttpServer()).post('/api/users').send(dto).expect(409); // Conflict
   });
 });

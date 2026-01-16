@@ -39,12 +39,14 @@ describe('ProductsModule (e2e)', () => {
     ];
     mockProductsRepository.findAll.mockResolvedValue(mockProducts);
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return request(app.getHttpServer())
       .get('/api/products')
       .expect(200)
       .expect((res) => {
-        expect(res.body.data).toHaveLength(2);
-        expect(res.body.data[0].name).toBe('S1');
+        const body = res.body as { data: any[] };
+        expect(body.data).toHaveLength(2);
+        expect(body.data[0].name).toBe('S1');
       });
   });
 
@@ -64,12 +66,14 @@ describe('ProductsModule (e2e)', () => {
       updatedAt: new Date(),
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return request(app.getHttpServer())
       .post('/api/products')
       .send(dto)
       .expect(201)
       .expect((res) => {
-        expect(res.body.data.name).toBe('New Smoothie');
+        const body = res.body as { data: any };
+        expect(body.data.name).toBe('New Smoothie');
       });
   });
 });
