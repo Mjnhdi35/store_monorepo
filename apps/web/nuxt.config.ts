@@ -4,9 +4,24 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   compatibilityDate: '2025-07-15',
   css: ['~/assets/css/main.css'],
+  runtimeConfig: {
+    apiBase: process.env.NUXT_API_BASE || 'http://localhost:3000',
+  },
   routeRules: {
-    '/api/**': { proxy: 'http://localhost:3000/**' },
+    '/api/auth/**': {
+      proxy: `${process.env.NUXT_API_BASE || 'http://localhost:3000'}/api/auth/**`,
+    },
+    '/api/users/**': {
+      proxy: `${process.env.NUXT_API_BASE || 'http://localhost:3000'}/api/users/**`,
+    },
+    '/api/products/**': {
+      proxy: `${process.env.NUXT_API_BASE || 'http://localhost:3000'}/api/products/**`,
+    },
     '/': { ssr: true },
-    '/products': { isr: 60 },
+    '/products/**': { ssr: false },
+    '/admin/**': { ssr: false },
+    '/login': { ssr: false },
+    '/register': { ssr: false },
+    '/about': { prerender: true },
   },
 });

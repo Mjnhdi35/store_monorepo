@@ -19,7 +19,10 @@
       />
     </div>
 
-    <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      v-else-if="products.length > 0"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
       <ProductCard
         v-for="product in products"
         :key="product.id"
@@ -27,16 +30,20 @@
         @add-to-cart="addToCart"
       />
     </div>
+
+    <div v-else class="text-center py-12">
+      <p class="text-gray-500">No products available</p>
+    </div>
   </UContainer>
 </template>
 
 <script setup lang="ts">
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-}
-
-const { data: products, status, error } = await useFetch<Product[]>('/api/products');
+const { products, loading, error, fetchProducts } = useProducts();
 const { addToCart, totalItems } = useCart();
+
+onMounted(() => {
+  fetchProducts();
+});
+
+const status = computed(() => (loading.value ? 'pending' : 'success'));
 </script>
