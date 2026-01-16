@@ -14,12 +14,10 @@
 </template>
 
 <script setup lang="ts">
+import type { Product } from '@smoothie_store/types';
+
 defineProps<{
-  product: {
-    id: number;
-    name: string;
-    price: string;
-  };
+  product: Product;
 }>();
 
 defineEmits(['add-to-cart']);

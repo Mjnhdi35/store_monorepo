@@ -1,23 +1,22 @@
-export const useCart = () => {
-  const cart = useState<{ id: number; name: string; price: string; quantity: number }[]>(
-    'cart',
-    () => [],
-  );
+import type { Product } from '@smoothie_store/types';
 
-  const addToCart = (product: { id: number; name: string; price: string }) => {
-    const existing = cart.value.find((item) => item.id === product.id);
-    if (existing) {
-      existing.quantity++;
-    } else {
-      cart.value.push({ ...product, quantity: 1 });
-    }
+export const useCart = () => {
+  const items = useState<Product[]>('cart_items', () => []);
+
+  const addToCart = (product: Product) => {
+    items.value.push(product);
   };
 
-  const totalItems = computed(() => cart.value.reduce((acc, item) => acc + item.quantity, 0));
+  const removeFromCart = (productId: number) => {
+    items.value = items.value.filter((item) => item.id !== productId);
+  };
+
+  const totalItems = computed(() => items.value.length);
 
   return {
-    cart,
+    items,
     addToCart,
+    removeFromCart,
     totalItems,
   };
 };

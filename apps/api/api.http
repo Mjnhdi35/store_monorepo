@@ -1,0 +1,54 @@
+@baseUrl = http://localhost:3000/api
+@contentType = application/json
+
+# -----------------------
+# USERS
+# -----------------------
+
+### Register User
+# @name register
+POST {{baseUrl}}/users
+Content-Type: {{contentType}}
+
+{
+  "username": "testuser",
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+
+# -----------------------
+# AUTH
+# -----------------------
+
+### Login
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "usernameOrEmail": "testuser",
+  "password": "password123"
+}
+
+### Capture Token
+@authToken = {{login.response.body.data.access_token}}
+
+# -----------------------
+# PRODUCTS
+# -----------------------
+
+### List Products
+GET {{baseUrl}}/products
+Content-Type: {{contentType}}
+
+### Create Product
+POST {{baseUrl}}/products
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "name": "Mango Magic",
+  "price": 5.99,
+  "description": "A delicious mango smoothie",
+  "image": "https://placehold.co/400"
+}

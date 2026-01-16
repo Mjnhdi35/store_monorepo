@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const { token, user, logout } = useAuth();
+</script>
+
 <template>
   <div class="min-h-screen flex flex-col">
     <header class="bg-white border-b border-gray-200">
@@ -6,7 +10,15 @@
         <nav class="flex gap-4">
           <NuxtLink to="/" class="hover:text-primary-600">Home</NuxtLink>
           <NuxtLink to="/products" class="hover:text-primary-600">Products</NuxtLink>
+          <NuxtLink to="/about" class="hover:text-primary-600">About</NuxtLink>
         </nav>
+        <div class="flex items-center gap-4">
+          <UButton v-if="!token" to="/login" variant="ghost">Sign In</UButton>
+          <div v-else class="flex items-center gap-4">
+            <span v-if="user" class="text-sm">Hi, {{ user.username }}</span>
+            <UButton color="error" variant="ghost" @click="logout">Sign Out</UButton>
+          </div>
+        </div>
       </UContainer>
     </header>
 
